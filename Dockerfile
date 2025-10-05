@@ -18,10 +18,10 @@ COPY src src
 RUN chmod +x ./gradlew
 
 # Build the application
-RUN ./gradlew shadowJar
+RUN ./gradlew clean shadowJar
 
 # Expose port
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "build/libs/ktor_sample-0.0.1-all.jar"]
+CMD ["java", "-jar", "build/libs/ktor_sample-all.jar"]

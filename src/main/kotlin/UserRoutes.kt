@@ -26,8 +26,18 @@ private val users = mutableListOf(
   User(4, "Kishor", "kk@jio.com")
 )
 
-suspend fun fetchUsersFromSupabase(): List<User> {
+suspend fun fetchAndroidUsersFromSupabase(): List<User> {
   val response: HttpResponse = client.get("https://csdjgmwlpyuajiklymgd.supabase.co/rest/v1/User_android") {
+    headers {
+      append("apikey", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZGpnbXdscHl1YWppa2x5bWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDQ2OTYsImV4cCI6MjA3NDM4MDY5Nn0.6MKStgdXSNN-OIpwXRST9jf0OjaAWi3ZYhEMwZLmKoI")
+      append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZGpnbXdscHl1YWppa2x5bWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDQ2OTYsImV4cCI6MjA3NDM4MDY5Nn0.6MKStgdXSNN-OIpwXRST9jf0OjaAWi3ZYhEMwZLmKoI")
+    }
+  }
+  return response.body()
+}
+
+suspend fun fetchIosUsersFromSupabase(): List<User> {
+  val response: HttpResponse = client.get("https://csdjgmwlpyuajiklymgd.supabase.co/rest/v1/User_ios") {
     headers {
       append("apikey", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZGpnbXdscHl1YWppa2x5bWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDQ2OTYsImV4cCI6MjA3NDM4MDY5Nn0.6MKStgdXSNN-OIpwXRST9jf0OjaAWi3ZYhEMwZLmKoI")
       append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZGpnbXdscHl1YWppa2x5bWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDQ2OTYsImV4cCI6MjA3NDM4MDY5Nn0.6MKStgdXSNN-OIpwXRST9jf0OjaAWi3ZYhEMwZLmKoI")
@@ -45,7 +55,11 @@ fun Route.userRoutes() {
     }
 
     get("/User_android") {
-      val users = fetchUsersFromSupabase()
+      val users = fetchAndroidUsersFromSupabase()
+      call.respond(users)
+    }
+    get("/fetchIosUsersFromSupabase") {
+      val users = fetchIosUsersFromSupabase()
       call.respond(users)
     }
 

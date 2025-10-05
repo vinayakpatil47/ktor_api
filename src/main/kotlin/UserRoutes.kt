@@ -58,7 +58,7 @@ fun Route.userRoutes() {
       val users = fetchAndroidUsersFromSupabase()
       call.respond(users)
     }
-    get("/fetchIosUsersFromSupabase") {
+    get("/User_ios") {
       val users = fetchIosUsersFromSupabase()
       call.respond(users)
     }
@@ -94,7 +94,7 @@ fun Route.userRoutes() {
       }
     }
 
-    // DELETE - remove usergit remote add origin https://github.com/vinayakpatil47/ktor_api.git
+    // DELETE - remove user
     delete("{id}") {
       val id = call.parameters["id"]?.toIntOrNull()
       val removed = users.removeIf { it.id == id }

@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ktor-api
+    env: java
+    buildCommand: ./gradlew shadowJar
+    startCommand: java -jar build/libs/ktor_sample-0.0.1-all.jar
+    envVars:
+      - key: PORT
+        value: 8080

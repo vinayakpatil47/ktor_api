@@ -80,7 +80,7 @@ fun Route.userRoutes() {
       }
     }
 
-    // DELETE - remove user
+    // DELETE - remove usergit remote add origin https://github.com/vinayakpatil47/ktor_api.git
     delete("{id}") {
       val id = call.parameters["id"]?.toIntOrNull()
       val removed = users.removeIf { it.id == id }
